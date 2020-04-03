@@ -1,7 +1,7 @@
-import { action, observable, computed } from "mobx";
+import { action, observable } from "mobx";
 import { services } from './services';
 
-interface IDocument {
+export interface IDocument {
     DocumentId: number,
     DocumentFileName: string,
     AzureFileReference: string,
@@ -17,11 +17,15 @@ export class DocumentStore {
     @action
     public getDocuments = ():void => {
         services.retrieveDocuments().then((response) => {
-            console.log("THEN: getDocuments: ", response);
             this.documents = response;
         }).catch((err) => {
             console.log("CATCH: getDocuments: ", err);
         });
+    }
+
+    fileType(fileName: string):string {
+        const splitString = fileName.split('.');
+        return splitString[splitString.length-1] || "N/A";
     }
 
     async init () {

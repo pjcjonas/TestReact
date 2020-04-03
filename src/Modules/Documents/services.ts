@@ -1,3 +1,5 @@
+import {Constants} from "../../Constants";
+
 export const asyncRequest = async (
     endpoint: string,
     requestBody: any,
@@ -33,8 +35,6 @@ export async function asyncApiRequest(
     return await fetch(endpoint, request);
 }
 
-const API_ROUTE_GET_DOCUMENTS = "https://0a763e61.ngrok.io/api/Documents";
-
 export const services = {
-    retrieveDocuments: async (requestBody?: any) => await asyncRequest(API_ROUTE_GET_DOCUMENTS, requestBody, "get")
+    retrieveDocuments: async (requestBody?: any) => await asyncRequest(Constants.API_GET_DOCUMENTS, requestBody, "get")
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import './App.css';
 import {initStores} from "./Stores";
 import {Routes} from "./Routes";
 import { AppContainer } from "react-hot-loader";
