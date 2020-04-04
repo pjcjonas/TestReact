@@ -29,24 +29,26 @@ export class DocumentList extends React.Component<IDocumentListProps>{
             <ListModuleWrapper>
                 <ListTable>
                     <thead>
-                        <th>#</th>
-                        <th>Document</th>
-                        <th>Type</th>
-                        <th>Category</th>
-                        <th>Last Reviewed</th>
-                        <th></th>
+                        <tr>
+                            <th>#</th>
+                            <th>Document</th>
+                            <th>Type</th>
+                            <th>Category</th>
+                            <th>Last Reviewed</th>
+                            <th></th>
+                        </tr>
                     </thead>
                     <tbody>
                     
                     {document_list.map((doc, index)=> (
                         <tr key={"document_" + index}>
                             <td>{doc.DocumentId}</td>
-                            <td>{documentStore.fileType(doc.DocumentFileName)}</td>
                             <td>{doc.DocumentFileName.substr(0, 25)}...</td>
+                            <td>{documentStore.fileType(doc.DocumentFileName)}</td>
                             <td>{doc.Category}</td>
                             <td>{doc.LastReviewed}</td>
                             <td className="align-right">
-                                <a href={Constants.DOWNLOAD_DOCUMENT + doc.DocumentId} target="_blank">
+                                <a href={Constants.DOWNLOAD_DOCUMENT + '/' + doc.DocumentId} target="_blank">
                                     <i className="fas fa-download"></i>
                                 </a>
                             </td>

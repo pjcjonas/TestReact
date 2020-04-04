@@ -27,14 +27,13 @@ export async function asyncApiRequest(
 ){
     const request: RequestInit = {
         method: method,
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: !isFormData ? {"Content-Type": "application/json"} : {"Content-Length": "multipart/form-data"},
         body: isFormData ? requestBody : JSON.stringify(requestBody)
     }
     return await fetch(endpoint, request);
 }
 
 export const services = {
-    retrieveDocuments: async (requestBody?: any) => await asyncRequest(Constants.API_GET_DOCUMENTS, requestBody, "get")
+    retrieveDocuments: async (requestBody?: any) => await asyncRequest(Constants.API_GET_DOCUMENTS, requestBody, "get"),
+    uploadDocument: async (requestBody?: any) => await asyncRequest(Constants.UPLOAD_DOCUMENT, requestBody, "post", true)
 };
