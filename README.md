@@ -1,44 +1,34 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## TEST PROJECT - DOCUMENT UPLOADER
+----
 
-## Available Scripts
+### User Interface
+For the user interface I decided to go with ReactJS with `TypeScript` using `mobx` as the state manager for the components.
 
-In the project directory, you can run:
+I decided to use `ngrok` to setup a test link between my Windows PC where I wrote the Web API and my Mac where I coded the React UI. For the ngrok url I hardcoded this in the `src/Constants.tsx`. 
 
-### `yarn start`
+The reason for ngrok is I have limited knowledge of deploying to Azure but I was able to configure the Azure Blob Store with some guidance from Google.com
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+> NOTE: If you plan on using ngrok as I have then you need to update the constant in `src/Constants.tsx` before building and running the app.
+`THIS WILL NEED TO BE ADDED TO ENV VARIABLE IF ITS TO BE USED IN ANY PROD ENV.`
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### INSTALLATION INSTRUCTIONS
 
-### `yarn test`
+#### To build
+```
+$ npm run build:clean 
+```
+This will delete the node_modules, package-lock.json and the build folder. It will then start the local server at `http://localhost:3000`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+----
 
-### `yarn build`
+```
+$ npm run start
+```
+This starts the build watch process and the server at `http://localhost:3000`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+----
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+$ npm run build
+```
+Only builds the project

@@ -34,6 +34,7 @@
     "react-hot-loader": "4.12.20"
   },
   "scripts": {
+    "build:clean": "rm -rf node_modules build package-lock.json && npm install && npm run build && npm run start",
     "start": "react-scripts start",
     "build": "react-scripts build"
   },
