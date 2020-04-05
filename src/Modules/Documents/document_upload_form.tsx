@@ -56,8 +56,17 @@ export class DocumentUploadForm extends React.Component<IDocumentFormProps>{
         const {category, file, lastReviewed} = documentStore.newDocumentFormState.$;
         return (
             <div>
+                {/* 
+                    This is a standard form the uses JSX properties for handeling onChange / onSubmit 
+                    events within the form. The values are assigned to input FormState fields in 
+                    the document store.
+
+                    The ErrorWrapper is a styled span element that shows the error when the formstate
+                    validation is called on submit.
+                */}
                 <h3>Add New Document</h3>
                 <FormWrapper onSubmit={(e) => documentStore.handleFormSubmit(e)}>
+                    
                     <FieldWrapper>
                         <Label>Category: <ErrorWrapper>{category.error}</ErrorWrapper></Label>
                         <FieldTextInput
@@ -79,6 +88,7 @@ export class DocumentUploadForm extends React.Component<IDocumentFormProps>{
                             type="file"
                             onChange={(e) => documentStore.handleFileSelect(e)} />
                     </FieldWrapper>
+                    
                     <button type="submit">Upload document</button>
                 </FormWrapper>
                 <hr/>

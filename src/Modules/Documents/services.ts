@@ -7,6 +7,12 @@ export const asyncRequest = async (
     isFormData = false
 ) => handleResponse(await asyncApiRequest(endpoint, requestBody, method, isFormData));
 
+/**
+ * Handles the response to make sure that the body is set to the 
+ * correct structure in case of an error.
+ * 
+ * @param response 
+ */
 export async function handleResponse(response: Response) {
     if (response.status === 400 || response.status === 409) {
         throw await response.json();
@@ -19,6 +25,16 @@ export async function handleResponse(response: Response) {
     return await response.json();
 }
 
+/**
+ * Processes the http request to the resource
+ * 
+ * @param endpoint API endpoint 
+ * @param requestBody The request body
+ * @param method The request method - post || get
+ * @param isFormData Boolean flag to determine a json or form-data header
+ * 
+ * @returns Promise
+ */
 export async function asyncApiRequest(
     endpoint: string,
     requestBody: any,

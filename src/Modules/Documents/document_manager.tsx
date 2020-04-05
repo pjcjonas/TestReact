@@ -18,9 +18,20 @@ const ModuleWrapper = styled.div`
     max-width: 1024px;
 `;
 
+/**
+ * Documents Base Application Component
+ * 
+ * We inject the document store into the React Component.
+ */
 @inject("documentStore")
 @observer
 export class DocumentApp extends React.Component<IDocumentProps>{
+
+    /**
+     * Initailiza the component by calling the init fuction, this will 
+     * trigger the component default state as well as do the inital 
+     * call to the documents API.
+     */
     componentDidMount() {
         this.props.documentStore.init();
     }
@@ -28,12 +39,35 @@ export class DocumentApp extends React.Component<IDocumentProps>{
     render () {
         const {documentStore} = this.props;
         return (
+            /**
+             * Using styled components we declare the ModuleWrapper 
+             * as a styled component div.
+             */
             <ModuleWrapper>
+                {/* 
+                    Header component for re-use
+                 */}
                 <HeaderBar header="Welcome to the docs" />
                 <Spacer />
+
+                {/* 
+                    Document Upload component.
+                */}
                 <DocumentUploadForm />
                 <Spacer />
+
+                {/* 
+                    During the defualt state as well as uploading a new document we set 
+                    the document list to an empty array, this will initiate this 
+                    line to show a preloader SVG animation.
+                */}
                 {documentStore.documents.length == 0 && <div className="align-content-center"><img src={loader} /></div>}
+
+                {/* 
+                    As with the preloader we show the document list that gets only a list 
+                    of documents. this will only show if the documents array has and 
+                    items in the list.
+                */}
                 {documentStore.documents.length > 0 && <DocumentList document_list={documentStore.documents}/>}
             </ModuleWrapper>    
         )

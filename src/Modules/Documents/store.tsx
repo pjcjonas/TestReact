@@ -1,8 +1,7 @@
-import { action, observable } from "mobx";
 import { services } from './services';
+import { action, observable } from "mobx";
 import { FormState, FieldState } from "formstate";
 import { isRequired, isValidDate, minLength } from '../Utils/validators';
-import { format } from 'date-fns';
 
 export interface IDocument {
     DocumentId: number,
@@ -12,22 +11,25 @@ export interface IDocument {
     LastReviewed: string
 }
 
+/**
+ * Document Process Store. Handles all the document functionality 
+ * for the UI Components.
+ */
 export class DocumentStore {
 
-    @observable 
-    public documents: IDocument[] = [];
-
-    @observable public selectedFile: any;
-
+    @observable selectedFile: any;
+    @observable newDocument = null;
+    @observable documents: IDocument[] = [];
     @observable newDocumentFormState = new FormState({
         file: new FieldState("").validators(isRequired, minLength(1)),
         category: new FieldState("").validators(isRequired, minLength(1)),
         lastReviewed: new FieldState("").validators(isRequired, isValidDate)
     });
 
-    @observable newDocument = null;
-
-    @action public getDocuments = ():void => {
+    /**
+     * Get all the documents from the service API
+     */
+    @action getDocuments = ():void => {
         this.documents = [];
         services.retrieveDocuments().then((response) => {
             this.documents = response;
@@ -36,6 +38,11 @@ export class DocumentStore {
         });
     }
 
+    /**
+     * Sprocess the form data on submit.
+     * 
+     * @param e Form submit event.
+     */
     @action async handleFormSubmit(e: any) {
         e.preventDefault();
 
@@ -58,19 +65,30 @@ export class DocumentStore {
         });
     }
 
+    /**
+     * We need to handle the form input for file selection seperately.
+     * @param e 
+     */
     handleFileSelect(e: any) {
         this.selectedFile = e.target.files[0] || null;
         this.newDocumentFormState.$.file.value = e.target.files[0].name || '';
     }
 
+    /**
+     * Extracts the file tupe based on the extension of the selected file.
+     * @param fileName 
+     */
     fileType(fileName: string):string {
         const splitString = fileName.split('.');
         return splitString[splitString.length-1] || "N/A";
     }
 
+    /**
+     * Initializes the store and setting the default properties for the form
+     * state and getting the document list.
+     */
     async init () {
         this.getDocuments();
-        const date = new Date();
         this.newDocumentFormState.$.category.reset();
         this.newDocumentFormState.$.file.reset();
         this.newDocumentFormState.$.lastReviewed.reset();

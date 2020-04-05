@@ -39,7 +39,10 @@ export class DocumentList extends React.Component<IDocumentListProps>{
                         </tr>
                     </thead>
                     <tbody>
-                    
+                    {/* 
+                        This is using the observerable document_list to render the documents 
+                        that gets returned from the documents api.
+                    */}
                     {document_list.map((doc, index)=> (
                         <tr key={"document_" + index}>
                             <td>{doc.DocumentId}</td>

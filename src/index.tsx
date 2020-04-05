@@ -1,13 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
 import './App.css';
-import {initStores} from "./Stores";
+import './index.css';
+import React from 'react';
 import {Routes} from "./Routes";
+import ReactDOM from 'react-dom';
+import {initStores} from "./Stores";
 import { AppContainer } from "react-hot-loader";
 
 const stores = initStores();
 
+/**
+ * Root Application Render
+ */
 const render = () =>{
   ReactDOM.render(
     <AppContainer>
@@ -18,8 +21,3 @@ const render = () =>{
 }
 
 render();
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-
