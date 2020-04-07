@@ -32,3 +32,5 @@ This starts the build watch process and the server at `http://localhost:3000`
 $ npm run build
 ```
 Only builds the project
+
+In order to view the UI navigate to `http://localhost:3000/docs`
